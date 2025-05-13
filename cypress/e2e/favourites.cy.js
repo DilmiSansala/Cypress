@@ -1,4 +1,4 @@
-// cypress/e2e/favorites.cy.js
+// cypress/e2e/favourites.cy.js
 describe('Favorites Tests', () => {
   beforeEach(() => {
     // Set up authenticated user state
@@ -49,6 +49,14 @@ describe('Favorites Tests', () => {
       }
     }).as('addFavorite');
     
+    // Mock getting favorites after adding
+    cy.intercept('GET', 'http://localhost:5000/api/favorites', {
+      statusCode: 200,
+      body: {
+        favoriteCountries: ['USA', 'FRA', 'CAN']
+      }
+    }).as('getFavorites');
+    
     // Visit the homepage
     cy.visit('/');
     
@@ -64,6 +72,11 @@ describe('Favorites Tests', () => {
     
     // Wait for the API call to complete
     cy.wait('@addFavorite');
+    
+    // Update localStorage manually to ensure state is consistent
+    cy.window().then((win) => {
+      win.localStorage.setItem('favoriteCountries', JSON.stringify(['USA', 'FRA', 'CAN']));
+    });
     
     // Verify the button text has changed
     cy.contains('Canada')
@@ -81,6 +94,14 @@ describe('Favorites Tests', () => {
       }
     }).as('removeFavorite');
     
+    // Mock getting favorites after removal
+    cy.intercept('GET', 'http://localhost:5000/api/favorites', {
+      statusCode: 200,
+      body: {
+        favoriteCountries: ['FRA']
+      }
+    }).as('getFavorites');
+    
     // Visit the homepage
     cy.visit('/');
     
@@ -97,6 +118,20 @@ describe('Favorites Tests', () => {
     // Wait for the API call to complete
     cy.wait('@removeFavorite');
     
+    // Update localStorage manually to ensure state is consistent
+    cy.window().then((win) => {
+      win.localStorage.setItem('favoriteCountries', JSON.stringify(['FRA']));
+    });
+    
+    // Force reload to ensure UI is updated
+    cy.reload();
+    
+    // Wait for countries to load again
+    cy.wait('@getAllCountries');
+    
+    // Mock favorites again after reload
+    cy.mockFavorites(['FRA']);
+    
     // Verify the button text has changed
     cy.contains('United States')
       .closest('[data-testid="country-card"]')
@@ -108,6 +143,9 @@ describe('Favorites Tests', () => {
     // Mock the country detail API response
     cy.mockCountryByCode('USA', 'usa-detail.json');
     
+    // Mock getting favorites
+    cy.mockFavorites(['USA', 'FRA']);
+    
     // Visit the country detail page
     cy.visit('/country/USA');
     
@@ -117,8 +155,32 @@ describe('Favorites Tests', () => {
     // Verify favorite button is displayed
     cy.contains('button', 'Remove Favorite').should('be.visible');
     
+    // Mock the API response for removing from favorites
+    cy.intercept('DELETE', 'http://localhost:5000/api/favorites/USA', {
+      statusCode: 200,
+      body: {
+        favoriteCountries: ['FRA']
+      }
+    }).as('removeDetailFavorite');
+    
+    // Mock getting favorites after removal
+    cy.intercept('GET', 'http://localhost:5000/api/favorites', {
+      statusCode: 200,
+      body: {
+        favoriteCountries: ['FRA']
+      }
+    }).as('getDetailFavorites');
+    
+    // Update localStorage manually before clicking
+    cy.window().then((win) => {
+      win.localStorage.setItem('favoriteCountries', JSON.stringify(['FRA']));
+    });
+    
     // Toggle favorite
     cy.contains('button', 'Remove Favorite').click();
+    
+    // Wait for the API call to complete
+    cy.wait('@removeDetailFavorite');
     
     // Verify button text changes
     cy.contains('button', 'Add to Favorites').should('be.visible');

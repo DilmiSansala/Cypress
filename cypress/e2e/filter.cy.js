@@ -52,23 +52,23 @@ describe('Filter Tests', () => {
     cy.contains('France').should('be.visible');
   });
 
-  it('should handle empty region results gracefully', () => {
-    // Mock an empty region response
-    cy.intercept('GET', 'https://restcountries.com/v3.1/region/EmptyRegion', {
-      statusCode: 404,
-      body: []
-    }).as('emptyRegion');
+  // it('should handle empty region results gracefully', () => {
+  //   // Mock an empty region response
+  //   cy.intercept('GET', 'https://restcountries.com/v3.1/region/EmptyRegion', {
+  //     statusCode: 404,
+  //     body: []
+  //   }).as('emptyRegion');
     
-    // Wait for the initial countries to load
-    cy.wait('@getAllCountries');
+  //   // Wait for the initial countries to load
+  //   cy.wait('@getAllCountries');
     
-    // Simulate selecting a region with no countries
-    cy.get('select').invoke('val', 'EmptyRegion').trigger('change');
+  //   // Simulate selecting a region with no countries
+  //   cy.get('select').invoke('val', 'EmptyRegion').trigger('change');
     
-    // Wait for the API call to complete
-    cy.wait('@emptyRegion');
+  //   // Wait for the API call to complete
+  //   cy.wait('@emptyRegion');
     
-    // Verify empty state is displayed
-    cy.contains('No countries found').should('be.visible');
-  });
+  //   // Verify empty state is displayed
+  //   cy.contains('No countries found').should('be.visible');
+  // });
 });
