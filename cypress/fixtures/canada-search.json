@@ -1,0 +1,28 @@
+// cypress/fixtures/canada-search.json
+[
+    {
+      "name": {
+        "common": "Canada",
+        "official": "Canada",
+        "nativeName": {
+          "eng": {
+            "official": "Canada",
+            "common": "Canada"
+          },
+          "fra": {
+            "official": "Canada",
+            "common": "Canada"
+          }
+        }
+      },
+      "cca3": "CAN",
+      "capital": ["Ottawa"],
+      "region": "Americas",
+      "subregion": "North America",
+      "population": 38005238,
+      "flags": {
+        "png": "https://flagcdn.com/w320/ca.png",
+        "svg": "https://flagcdn.com/ca.svg"
+      }
+    }
+  ]

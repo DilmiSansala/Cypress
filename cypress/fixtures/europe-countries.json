@@ -1,0 +1,45 @@
+// cypress/fixtures/europe-countries.json
+[
+    {
+      "name": {
+        "common": "France",
+        "official": "French Republic",
+        "nativeName": {
+          "fra": {
+            "official": "République française",
+            "common": "France"
+          }
+        }
+      },
+      "cca3": "FRA",
+      "capital": ["Paris"],
+      "region": "Europe",
+      "subregion": "Western Europe",
+      "population": 67391582,
+      "flags": {
+        "png": "https://flagcdn.com/w320/fr.png",
+        "svg": "https://flagcdn.com/fr.svg"
+      }
+    },
+    {
+      "name": {
+        "common": "Germany",
+        "official": "Federal Republic of Germany",
+        "nativeName": {
+          "deu": {
+            "official": "Bundesrepublik Deutschland",
+            "common": "Deutschland"
+          }
+        }
+      },
+      "cca3": "DEU",
+      "capital": ["Berlin"],
+      "region": "Europe",
+      "subregion": "Western Europe",
+      "population": 83240525,
+      "flags": {
+        "png": "https://flagcdn.com/w320/de.png",
+        "svg": "https://flagcdn.com/de.svg"
+      }
+    }
+  ]

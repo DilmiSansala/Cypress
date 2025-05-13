@@ -1,0 +1,91 @@
+// cypress/fixtures/countries.json
+[
+    {
+      "name": {
+        "common": "United States",
+        "official": "United States of America",
+        "nativeName": {
+          "eng": {
+            "official": "United States of America",
+            "common": "United States"
+          }
+        }
+      },
+      "cca3": "USA",
+      "capital": ["Washington D.C."],
+      "region": "Americas",
+      "subregion": "North America",
+      "population": 331002651,
+      "flags": {
+        "png": "https://flagcdn.com/w320/us.png",
+        "svg": "https://flagcdn.com/us.svg"
+      }
+    },
+    {
+      "name": {
+        "common": "Canada",
+        "official": "Canada",
+        "nativeName": {
+          "eng": {
+            "official": "Canada",
+            "common": "Canada"
+          },
+          "fra": {
+            "official": "Canada",
+            "common": "Canada"
+          }
+        }
+      },
+      "cca3": "CAN",
+      "capital": ["Ottawa"],
+      "region": "Americas",
+      "subregion": "North America",
+      "population": 38005238,
+      "flags": {
+        "png": "https://flagcdn.com/w320/ca.png",
+        "svg": "https://flagcdn.com/ca.svg"
+      }
+    },
+    {
+      "name": {
+        "common": "France",
+        "official": "French Republic",
+        "nativeName": {
+          "fra": {
+            "official": "République française",
+            "common": "France"
+          }
+        }
+      },
+      "cca3": "FRA",
+      "capital": ["Paris"],
+      "region": "Europe",
+      "subregion": "Western Europe",
+      "population": 67391582,
+      "flags": {
+        "png": "https://flagcdn.com/w320/fr.png",
+        "svg": "https://flagcdn.com/fr.svg"
+      }
+    },
+    {
+      "name": {
+        "common": "Germany",
+        "official": "Federal Republic of Germany",
+        "nativeName": {
+          "deu": {
+            "official": "Bundesrepublik Deutschland",
+            "common": "Deutschland"
+          }
+        }
+      },
+      "cca3": "DEU",
+      "capital": ["Berlin"],
+      "region": "Europe",
+      "subregion": "Western Europe",
+      "population": 83240525,
+      "flags": {
+        "png": "https://flagcdn.com/w320/de.png",
+        "svg": "https://flagcdn.com/de.svg"
+      }
+    }
+  ]
