@@ -37,18 +37,19 @@ const HomePage = () => {
     setSelectedRegion(region);
     setShowFavorites(false);
     
-    if (!region) {
-      setFilteredCountries(countries);
-      return;
-    }
-    
     try {
       setLoading(true);
-      const data = await countriesService.getCountriesByRegion(region);
-      setFilteredCountries(data);
+      if (!region) {
+        // This is the "All" selection case - need to fetch all countries
+        const data = await countriesService.getAllCountries();
+        setFilteredCountries(data);
+      } else {
+        const data = await countriesService.getCountriesByRegion(region);
+        setFilteredCountries(data);
+      }
       setLoading(false);
     } catch (err) {
-      setError(`Failed to fetch countries in ${region}. Please try again later.`);
+      setError(`Failed to fetch countries in ${region || 'all regions'}. Please try again later.`);
       setLoading(false);
     }
   };
@@ -123,6 +124,7 @@ const HomePage = () => {
                         ? 'bg-gradient-to-r from-rose-500 to-pink-600 text-white hover:shadow-rose-500/30'
                         : 'bg-gradient-to-r from-indigo-500 to-blue-600 text-white hover:shadow-blue-500/30'
                     }`}
+                    data-testid="favorites-toggle-button"
                   >
                     <div className="flex items-center">
                       <svg 

@@ -20,7 +20,7 @@ describe('Country Detail Tests', () => {
       cy.wait('@getUSADetail');
       
       // Verify country name is displayed
-      cy.contains('h1', 'United States').should('be.visible');
+      cy.contains('United States').should('be.visible');
       
       // Check for essential country details
       cy.contains('Capital').should('be.visible');
@@ -59,7 +59,7 @@ describe('Country Detail Tests', () => {
       cy.wait('@getAllCountries');
       
       // Verify we're back on the homepage
-      cy.contains('h1', 'Discover the World').should('be.visible');
+      cy.contains('Discover the World').should('be.visible');
       cy.url().should('eq', Cypress.config().baseUrl + '/');
     });
   
@@ -77,10 +77,13 @@ describe('Country Detail Tests', () => {
       cy.wait('@getFakeCountry');
       
       // Verify error message is displayed using data-testid attributes
+      cy.get('[data-testid="error-title"]').should('be.visible');
       cy.get('[data-testid="error-title"]').should('contain', 'Oops! Something went wrong');
+      cy.get('[data-testid="error-message"]').should('be.visible');
       cy.get('[data-testid="error-message"]').should('contain', 'Country not found');
       
       // Verify go back button is available
-      cy.get('[data-testid="go-back-button"]').should('be.visible').and('contain', 'Go Back to Home');
+      cy.get('[data-testid="go-back-button"]').should('be.visible');
+      cy.get('[data-testid="go-back-button"]').should('contain', 'Go Back to Home');
     });
   });

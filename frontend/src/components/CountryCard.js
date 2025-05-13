@@ -86,7 +86,7 @@ const CountryCard = ({ country }) => {
             {/* Region Badge */}
             <div className="absolute top-3 right-3 z-10">
               <span 
-                className={`px-3 py-1 text-xs font-medium text-white rounded-full bg-gradient-to-r ${regionColors.gradient} shadow-md`}
+                className={`px-3 py-1 text-xs font-medium text-white rounded-full bg-gradient-to-r ${regionColors.gradient }shadow-md`}
                 data-region={country.region}
                 data-testid="country-region"
               >
@@ -155,15 +155,11 @@ const CountryCard = ({ country }) => {
                 e.stopPropagation();
                 toggleFavorite(country.cca3);
               }}
-              className={`w-full flex items-center justify-center py-2 px-4 rounded-xl font-medium text-sm transition-all duration-300 ${
-                isFavorite(country.cca3)
-                  ? 'bg-gradient-to-r from-rose-500 to-pink-600 text-white hover:shadow-md hover:shadow-rose-200/50'
-                  : `bg-white border ${regionColors.border} ${regionColors.text} hover:bg-gray-50 hover:shadow-md`
-              }`}
+              className="w-full flex items-center justify-center py-3 px-4 rounded-xl font-medium text-sm transition-all duration-300"
             >
               <svg 
-                className={`h-4 w-4 mr-1.5 ${isFavorite(country.cca3) ? 'text-white' : regionColors.text}`} 
-                fill={isFavorite(country.cca3) ? 'currentColor' : 'none'} 
+                className="h-4 w-4 mr-1.5" 
+                fill={isFavorite(country.cca3) ? "currentColor" : "none"} 
                 viewBox="0 0 24 24" 
                 stroke="currentColor"
               >
@@ -174,7 +170,7 @@ const CountryCard = ({ country }) => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" 
                 />
               </svg>
-              {isFavorite(country.cca3) ? 'Remove Favorite' : 'Add to Favorites'}
+              {isFavorite(country.cca3) ? 'Remove from Favorites' : 'Add to Favorites'}
             </button>
           )}
         </div>

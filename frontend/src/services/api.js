@@ -12,6 +12,9 @@ const countriesService = {
       return response.data;
     } catch (error) {
       console.error('Error fetching all countries:', error);
+      if (error.response && error.response.status === 404) {
+        return []; // Return empty array if no countries found
+      }
       throw error;
     }
   },
@@ -37,6 +40,9 @@ const countriesService = {
       return response.data;
     } catch (error) {
       console.error(`Error fetching countries in region "${region}":`, error);
+      if (error.response && error.response.status === 404) {
+        return []; // Return empty array if no countries in region
+      }
       throw error;
     }
   },
@@ -48,6 +54,9 @@ const countriesService = {
       return response.data[0];
     } catch (error) {
       console.error(`Error fetching country with code "${code}":`, error);
+      if (error.response && error.response.status === 404) {
+        throw new Error('Country not found'); // Throw specific error for country not found
+      }
       throw error;
     }
   }

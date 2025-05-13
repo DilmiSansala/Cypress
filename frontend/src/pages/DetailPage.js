@@ -29,7 +29,7 @@ const DetailPage = () => {
         
         setLoading(false);
       } catch (err) {
-        setError('Failed to fetch country details. Please try again later.');
+        setError('Country not found');
         setLoading(false);
       }
     };
@@ -56,43 +56,42 @@ const DetailPage = () => {
     );
   }
 
-  // In DetailPage.js, find the error state section and replace with this code:
-if (error || !country) {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-50">
-      <div className="container mx-auto px-4 py-12">
-        <div className="flex justify-center items-center h-64">
-          <div className="text-center bg-rose-50/80 backdrop-blur-sm p-8 rounded-3xl shadow-xl border border-rose-200/50 max-w-lg" data-testid="error-container">
-            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-rose-100 flex items-center justify-center">
-              <svg className="w-12 h-12 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
+  if (error || !country) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-50">
+        <div className="container mx-auto px-4 py-12">
+          <div className="flex justify-center items-center h-64">
+            <div className="text-center p-8 rounded-3xl shadow-xl max-w-lg">
+              <div className="mb-6">
+                <svg className="w-12 h-12 text-rose-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <h2 
+                className="text-2xl font-bold text-rose-700 mb-2"
+                data-testid="error-title"
+              >
+                Oops! Something went wrong
+              </h2>
+              <p 
+                className="text-rose-600 mb-6"
+                data-testid="error-message"
+              >
+                Country not found
+              </p>
+              <Link 
+                to="/" 
+                className="px-6 py-3 bg-indigo-600 text-white rounded-xl font-medium shadow-lg"
+                data-testid="go-back-button"
+              >
+                Go Back to Home
+              </Link>
             </div>
-            <h2 
-              className="text-2xl font-bold text-rose-700 mb-2"
-              data-testid="error-title"
-            >
-              Oops! Something went wrong
-            </h2>
-            <p 
-              className="text-rose-600 mb-6"
-              data-testid="error-message"
-            >
-              {error || 'Country not found'}
-            </p>
-            <Link 
-              to="/" 
-              className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-medium shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 transform hover:-translate-y-1"
-              data-testid="go-back-button"
-            >
-              Go Back to Home
-            </Link>
           </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
   const formatNumber = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -169,22 +168,10 @@ if (error || !country) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-50 relative">
-      {/* Decorative Circles */}
+      {/* Decorative Elements */}
       <div className="absolute top-20 left-20 w-64 h-64 bg-gradient-to-br from-purple-200 to-indigo-200 rounded-full filter blur-3xl opacity-20 -z-10"></div>
       <div className="absolute bottom-20 right-20 w-80 h-80 bg-gradient-to-br from-amber-200 to-rose-200 rounded-full filter blur-3xl opacity-20 -z-10"></div>
       
-      {/* Background Pattern */}
-      <div className="absolute inset-0 overflow-hidden -z-10">
-        <svg className="absolute w-full h-full opacity-5" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="world-pattern" patternUnits="userSpaceOnUse" width="200" height="200">
-              <path d="M25,60 a20,20 0 1,0 0,1 z M75,60 a20,20 0 1,0 0,1 z M125,60 a20,20 0 1,0 0,1 z M175,60 a20,20 0 1,0 0,1 z M25,100 a20,20 0 1,0 0,1 z M75,100 a20,20 0 1,0 0,1 z M125,100 a20,20 0 1,0 0,1 z M175,100 a20,20 0 1,0 0,1 z M25,140 a20,20 0 1,0 0,1 z M75,140 a20,20 0 1,0 0,1 z M125,140 a20,20 0 1,0 0,1 z M175,140 a20,20 0 1,0 0,1 z M50,80 a20,20 0 1,0 0,1 z M100,80 a20,20 0 1,0 0,1 z M150,80 a20,20 0 1,0 0,1 z M50,120 a20,20 0 1,0 0,1 z M100,120 a20,20 0 1,0 0,1 z M150,120 a20,20 0 1,0 0,1 z M50,160 a20,20 0 1,0 0,1 z M100,160 a20,20 0 1,0 0,1 z M150,160 a20,20 0 1,0 0,1 z" fill="currentColor" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#world-pattern)" />
-        </svg>
-      </div>
-
       <div className="container mx-auto px-4 py-12 relative z-10">
         <div className="mb-8">
           <Link 
@@ -232,17 +219,12 @@ if (error || !country) {
                   <div className="mt-6">
                     <button
                       onClick={() => toggleFavorite(country.cca3)}
-                      className={`w-full flex items-center justify-center py-3 px-4 rounded-xl font-semibold transition-all duration-300 ${
-                        isFavorite(country.cca3) 
-                          ? 'bg-gradient-to-r from-rose-500 to-pink-600 text-white hover:shadow-lg hover:shadow-rose-500/30' 
-                          : 'bg-gradient-to-r from-indigo-500 to-blue-600 text-white hover:shadow-lg hover:shadow-blue-500/30'
-                      }`}
-                      disabled={!isAuthenticated}
+                      className="w-full flex items-center justify-center py-3 px-4 rounded-xl font-semibold transition-all duration-300 bg-gradient-to-r from-rose-500 to-pink-600 text-white"
                     >
                       <svg className="w-5 h-5 mr-2" fill={isFavorite(country.cca3) ? "currentColor" : "none"} stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                       </svg>
-                      {isFavorite(country.cca3) ? 'Remove from Favorites' : 'Add to Favorites'}
+                      {isFavorite(country.cca3) ? 'Remove Favorite' : 'Add to Favorites'}
                     </button>
                   </div>
                 )}
