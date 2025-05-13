@@ -76,11 +76,11 @@ describe('Country Detail Tests', () => {
       // Wait for the API call to complete
       cy.wait('@getFakeCountry');
       
-      // Verify error message is displayed
-      cy.contains('Oops! Something went wrong').should('be.visible');
-      cy.contains('Country not found').should('be.visible');
+      // Verify error message is displayed using data-testid attributes
+      cy.get('[data-testid="error-title"]').should('contain', 'Oops! Something went wrong');
+      cy.get('[data-testid="error-message"]').should('contain', 'Country not found');
       
       // Verify go back button is available
-      cy.contains('Go Back to Home').should('be.visible');
+      cy.get('[data-testid="go-back-button"]').should('be.visible').and('contain', 'Go Back to Home');
     });
   });

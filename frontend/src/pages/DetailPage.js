@@ -56,31 +56,43 @@ const DetailPage = () => {
     );
   }
 
-  if (error || !country) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-50">
-        <div className="container mx-auto px-4 py-12">
-          <div className="flex justify-center items-center h-64">
-            <div className="text-center bg-rose-50/80 backdrop-blur-sm p-8 rounded-3xl shadow-xl border border-rose-200/50 max-w-lg">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-rose-100 flex items-center justify-center">
-                <svg className="w-12 h-12 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <h2 className="text-2xl font-bold text-rose-700 mb-2">Oops! Something went wrong</h2>
-              <p className="text-rose-600 mb-6">{error || 'Country not found.'}</p>
-              <Link 
-                to="/" 
-                className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-medium shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 transform hover:-translate-y-1"
-              >
-                Go Back to Home
-              </Link>
+  // In DetailPage.js, find the error state section and replace with this code:
+if (error || !country) {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-50">
+      <div className="container mx-auto px-4 py-12">
+        <div className="flex justify-center items-center h-64">
+          <div className="text-center bg-rose-50/80 backdrop-blur-sm p-8 rounded-3xl shadow-xl border border-rose-200/50 max-w-lg" data-testid="error-container">
+            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-rose-100 flex items-center justify-center">
+              <svg className="w-12 h-12 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
             </div>
+            <h2 
+              className="text-2xl font-bold text-rose-700 mb-2"
+              data-testid="error-title"
+            >
+              Oops! Something went wrong
+            </h2>
+            <p 
+              className="text-rose-600 mb-6"
+              data-testid="error-message"
+            >
+              {error || 'Country not found'}
+            </p>
+            <Link 
+              to="/" 
+              className="px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl font-medium shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 transform hover:-translate-y-1"
+              data-testid="go-back-button"
+            >
+              Go Back to Home
+            </Link>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
   const formatNumber = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");

@@ -6,10 +6,11 @@ const CountryCard = ({ country }) => {
   const { isAuthenticated, isFavorite, toggleFavorite } = useContext(SessionContext);
   const [isHovered, setIsHovered] = useState(false);
 
-    // Helper function to format population numbers with commas
+  // Helper function to format population numbers with commas
   const formatPopulation = (population) => {
     return population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+  
   // Function to get region-specific colors for styling
   const getRegionColors = (region) => {
     switch(region) {
@@ -63,6 +64,7 @@ const CountryCard = ({ country }) => {
   return (
     <div 
       className="group cursor-pointer"
+      data-testid="country-card"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -76,13 +78,18 @@ const CountryCard = ({ country }) => {
             {/* Flag Image */}
             <img 
               src={country.flags.png} 
-              alt={`Flag of ${country.name.common}`} 
+              alt={`Flag of ${country.name.common}`}
               className={`w-full h-full object-contain p-1 transition-transform duration-700 ${isHovered ? 'scale-105' : 'scale-100'}`}
+              data-testid="country-flag"
             />
             
             {/* Region Badge */}
             <div className="absolute top-3 right-3 z-10">
-              <span className={`px-3 py-1 text-xs font-medium text-white rounded-full bg-gradient-to-r ${regionColors.gradient} shadow-md`}>
+              <span 
+                className={`px-3 py-1 text-xs font-medium text-white rounded-full bg-gradient-to-r ${regionColors.gradient} shadow-md`}
+                data-region={country.region}
+                data-testid="country-region"
+              >
                 {country.region}
               </span>
             </div>
@@ -93,7 +100,10 @@ const CountryCard = ({ country }) => {
         <div className="p-4">
           {/* Country Name */}
           <Link to={`/country/${country.cca3}`} className="block mb-4">
-            <h2 className={`text-xl font-bold tracking-tight ${regionColors.text} transition-colors duration-300 group-hover:text-opacity-90 line-clamp-1`}>
+            <h2 
+              className={`text-xl font-bold tracking-tight ${regionColors.text} transition-colors duration-300 group-hover:text-opacity-90 line-clamp-1`}
+              data-testid="country-name"
+            >
               {country.name.common}
             </h2>
           </Link>
@@ -109,7 +119,10 @@ const CountryCard = ({ country }) => {
               </div>
               <div className="ml-2">
                 <div className="text-xs text-gray-500 font-medium">Capital</div>
-                <div className="text-sm text-gray-700 font-medium truncate max-w-[120px]">
+                <div 
+                  className="text-sm text-gray-700 font-medium truncate max-w-[120px]"
+                  data-testid="country-capital"
+                >
                   {country.capital ? country.capital.join(', ') : 'N/A'}
                 </div>
               </div>
@@ -123,7 +136,10 @@ const CountryCard = ({ country }) => {
               </div>
               <div className="ml-2">
                 <div className="text-xs text-gray-500 font-medium">Population</div>
-                <div className="text-sm text-gray-700 font-medium truncate max-w-[120px]">
+                <div 
+                  className="text-sm text-gray-700 font-medium truncate max-w-[120px]"
+                  data-testid="country-population"
+                >
                   {formatPopulation(country.population)}
                 </div>
               </div>
@@ -133,6 +149,7 @@ const CountryCard = ({ country }) => {
           {/* Favorite Button */}
           {isAuthenticated && (
             <button
+              data-testid={`favorite-button-${country.cca3}`}
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
